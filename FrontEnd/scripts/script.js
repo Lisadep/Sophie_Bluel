@@ -65,9 +65,20 @@ buttonHotelsAndRestaurants.addEventListener("click", function() {
 
 
 let user = {
-    "email": "sophie.bluel@test.tld",
-    "password": "S0phie "
+    email: "sophie.bluel@test.tld",
+    password: "S0phie"
 };
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
+
+
+function login() {
+    fetch(root + 'users/login' , {method : 'POST', body:{
+        email: "sophie.bluel@test.tld",
+        password: "S0phie"
+    }
+}).then(response => console.log(response));
+}
+
+login();
