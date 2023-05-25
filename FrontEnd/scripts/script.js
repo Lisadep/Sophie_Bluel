@@ -37,52 +37,58 @@ const buttonObjects = document.querySelector(".objects");
 const buttonApartments = document.querySelector(".apartments");
 const buttonHotelsAndRestaurants = document.querySelector(".hotelsAndRestaurants");
 
-function displayCategories() {
-  // Récupération des catégories de l'API
+// function displayCategories() {
+//   // Récupération des catégories de l'API
 
-  fetch(root + "categories")
-    .then((reponse) => reponse.json())
-    .then((category) => {
-      categoryFilters = category;
-      console.log(category)
+//   fetch(root + "categories")
+//     .then((reponse) => reponse.json())
+//     .then((category) => {
+//       categoryFilters = category;
+//       console.log(category)
 
-    //   for (let i = 0; i < category.length; i++) {
-    //     const categories = category[i];
+//     //   for (let i = 0; i < category.length; i++) {
+//     //     const categories = category[i];
 
-    //   }
+//     //   }
 
-    });
-}
+//     });
+// }
 
-displayCategories();
+// displayCategories();
 
 buttonAll.addEventListener("click", function() {
     document.querySelector(".gallery").innerHTML = "";
-    displayWork(loadedData);
+    buttonAll.classList.add("filter_selected")
+    displayWork(loadedData)
 });
 
 buttonObjects.addEventListener("click", function() {
     document.querySelector(".gallery").innerHTML = "";
     displayWork(
-        loadedData.filter((work) => work.categoryId = 1)
+        loadedData.filter((work) => work.categoryId === 1)
       );
 });
 
 
-// Utiliser set pour modifier le tableau des travaux
-// let displayObjects = [...new Set(tab)];
+buttonApartments.addEventListener("click", function(param) {
+    selectFilter(param)
+});
+
+function selectFilter(param) {
+  if (param.target.class === "apartments") {
+    displayWork(
+      loadedData.filter((work) => work.categoryId === 2)
+    );
+  } else {
+    console.log("erreur")
+  }
+  }
 
 
-// buttonApartments.addEventListener("click", function() {
-//     document.querySelector(".gallery").innerHTML = "";
-//     displayWork(
-//         loadedData.filter((work) => work.category.name.includes("Appartements"))
-//       );
+// -------------Test avec data
+
+// buttonApartments.addEventListener("click", function(param) {
+//   document.querySelector(".gallery").innerHTML = "";
+//   selectFilter(param)
 // });
 
-// buttonHotelsAndRestaurants.addEventListener("click", function() {
-//     document.querySelector(".gallery").innerHTML = "";
-//     displayWork(
-//         loadedData.filter((work) => work.category.name.includes("Hotels & restaurants"))
-//       );
-// });
