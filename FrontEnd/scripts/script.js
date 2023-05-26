@@ -14,6 +14,7 @@ async function loadWorks() {
 //Fonction pour afficher les travaux dans le DOM
 function displayWork(data) {
   const gallery = document.querySelector(".gallery");
+  gallery.innerHTML= "";
   for (let i = 0; i < data.length; i++) {
     // Récupération de l'élément du DOM qui accueillera les travaux
     const figure = document.createElement("figure");
@@ -37,58 +38,35 @@ const buttonObjects = document.querySelector(".objects");
 const buttonApartments = document.querySelector(".apartments");
 const buttonHotelsAndRestaurants = document.querySelector(".hotelsAndRestaurants");
 
-// function displayCategories() {
-//   // Récupération des catégories de l'API
+function displayCategories() {
+  // Récupération des catégories de l'API
 
-//   fetch(root + "categories")
-//     .then((reponse) => reponse.json())
-//     .then((category) => {
-//       categoryFilters = category;
-//       console.log(category)
+  fetch(root + "categories")
+    .then((reponse) => reponse.json())
+    .then((category) => {
+      categoryFilters = category;
+      console.log(category)
 
-//     //   for (let i = 0; i < category.length; i++) {
-//     //     const categories = category[i];
+      const btnAll = document.createElement("button");
+        btnAll.innerHTML = "Tous";
+        document.getElementById("filters").appendChild(btnAll);
+        btnAll.addEventListener("click", function() {
+          displayWork(
+            loadedData
+        )});
+        
 
-//     //   }
+      category.forEach(element => {
+        const btnFilters = document.createElement("button");
+        btnFilters.innerHTML = element.name;
+        document.getElementById("filters").appendChild(btnFilters);
+        btnFilters.addEventListener("click", function() {
+          displayWork(
+            loadedData.filter((work) => work.categoryId === element.id)
+          );
+        })
+      });
+    });
+}
 
-//     });
-// }
-
-// displayCategories();
-
-buttonAll.addEventListener("click", function() {
-    document.querySelector(".gallery").innerHTML = "";
-    buttonAll.classList.add("filter_selected")
-    displayWork(loadedData)
-});
-
-buttonObjects.addEventListener("click", function() {
-    document.querySelector(".gallery").innerHTML = "";
-    displayWork(
-        loadedData.filter((work) => work.categoryId === 1)
-      );
-});
-
-
-buttonApartments.addEventListener("click", function(param) {
-    selectFilter(param)
-});
-
-function selectFilter(param) {
-  if (param.target.class === "apartments") {
-    displayWork(
-      loadedData.filter((work) => work.categoryId === 2)
-    );
-  } else {
-    console.log("erreur")
-  }
-  }
-
-
-// -------------Test avec data
-
-// buttonApartments.addEventListener("click", function(param) {
-//   document.querySelector(".gallery").innerHTML = "";
-//   selectFilter(param)
-// });
-
+displayCategories();
