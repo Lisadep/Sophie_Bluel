@@ -11,9 +11,16 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/f9b5c6e09c.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
+	<div class="edit-mode">
+		<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+		<p>Mode édition</p>
+		<p class="publish-changes">publier les changements</p>
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -43,10 +50,33 @@
 		</section>
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<div class="filters" id="filters">
-			</div>
+			<a href="#modal-edit" class="js-modal">modifier</a>
+				<i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>
+			<div class="filters" id="filters"></div>
 			<div class="gallery"></div>
 		</section>
+
+		<aside id="modal-edit" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+			aria-labelledby="modal-edit-title" style="display:none">
+			<div class="modal-wrapper js-modal-stop">
+				<div class="modal-cross js-modal-cross">
+					<i class="fa-solid fa-xmark"></i>
+				</div>
+				<p class="modal-edit-title">Galerie photo</p>
+				<hr class="modal-border">
+				<button class="add-picture">
+					<a href="#">
+						<p>Ajouter une photo</p>
+					</a>
+				</button>
+				<button class="delete-gallery">
+					<a href="#">
+						<p>Supprimer la galerie</p>
+					</a>
+				</button>
+			</div>
+		</aside>
+
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>

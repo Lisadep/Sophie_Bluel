@@ -53,6 +53,26 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+.edit-mode {
+	background-color: black;
+	color: white;
+	font: "Work Sans";
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 21px;
+	height: 59px;
+}
+.publish-changes {
+	color: black;
+	background-color: white;
+	border-radius: 60px;
+	width: 216px;
+	height: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 header {
 	display: flex;
 	justify-content: space-between;
@@ -75,7 +95,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -134,6 +153,68 @@ li:hover, a:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-edit-title {
+	display: flex;
+	justify-content: center;
+	font-size: 26px;
+}
+.modal-cross {
+	margin-left: 375px;
+}
+.modal-wrapper {
+	overflow: auto;
+	width: 600px;
+	max-width: calc(100vh - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #FFF;
+	display: flex;
+	flex-direction: column;
+}
+.modal-border {
+  color: #B3B3B3;
+  width: 320px;
+  margin-bottom: 30px;
+}
+.add-picture {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	color: white;
+	background-color: #1D6154;
+	border-radius: 60px;
+	width: 237px;
+	height: 36px;
+	border-style: none;
+}
+.add-picture a {
+	color: white;
+	text-decoration: none;
+}
+.delete-gallery {
+	border: none;
+	background-color: white;
+	width: 140px;
+}
+.delete-gallery a{
+	color: red;
+}
+.add-picture, .delete-gallery{
+	margin: 11px auto;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
