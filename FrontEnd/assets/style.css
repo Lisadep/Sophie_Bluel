@@ -149,9 +149,32 @@ li:hover, a:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	margin-left: 110px;
+}
+.gallery-title {
+	display: flex;
+	justify-content: center;
+}
+#introduction .edit-btn {
+	margin-left: 57px;
+}
+.edit-btn {
+	margin-left: 30px;
+	margin-top: 10px;
+	visibility: hidden;
+}
+.edit-btn a {
+	color: black;
+	text-decoration: none;
+}
+.edit-mode {
+	width: 100vw;
+    margin-left: calc(-1 * ((100vw - 100%) / 2));
+	display: none;
 }
 .modal {
 	position: fixed;
@@ -162,16 +185,38 @@ li:hover, a:hover {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-edit-title {
 	display: flex;
 	justify-content: center;
 	font-size: 26px;
+	margin-bottom: 45px;
+}
+#modal-gallery {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+    margin: 0 10%;
+}
+#modal-gallery img {
+	width: 80px;
+	height: 105px;
 }
 .modal-cross {
-	margin-left: 375px;
+	margin-left: 545px;
+}
+.deleteIconeBg {
+	background-color: black;
+    width: 9px;
+    padding: 4px;
+    border-radius: 2px;
+    position: relative;
+    bottom: 114px;
+    left: 57px;
+}
+.deleteIcone {
+	color: white;
 }
 .modal-wrapper {
 	overflow: auto;
@@ -185,8 +230,57 @@ li:hover, a:hover {
 }
 .modal-border {
   color: #B3B3B3;
-  width: 320px;
+  width: 445px;
   margin-bottom: 30px;
+  margin-top: 25px;
+}
+.modal-add {
+	display: none;
+}
+
+.modal-add-icons {
+	display: flex;
+    justify-content: space-between;
+}
+.modal-add-img {
+	background-color: #E8F1F7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 420px;
+    height: 170px;
+	margin: auto;
+	gap: 8px;
+	border-radius: 3px;
+}
+.modal-add-img > i {
+	transform: scale(4); 
+	margin-top: 45px;
+	margin-bottom: 35px;
+	color: #B9C5CC;
+}
+.modal-add-img > p {
+	font-size: 10px;
+}
+.modal-add-img-btn {
+	width: 173px;
+    border-radius: 50px;
+    background-color: #CBD6DC;
+    color: #306685;
+    font-weight: 600;
+    font-family: Work Sans;
+	font-size: 14px;
+    border: 1px;
+    padding: 8px;
+}
+.modal-add-form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.title-form {
+	width: 173px;
+	border: 1px solid;
 }
 .add-picture {
 	font-family: 'Syne';
@@ -198,6 +292,7 @@ li:hover, a:hover {
 	width: 237px;
 	height: 36px;
 	border-style: none;
+	padding: 10px;
 }
 .add-picture a {
 	color: white;
@@ -210,6 +305,7 @@ li:hover, a:hover {
 }
 .delete-gallery a{
 	color: red;
+	text-decoration: none;
 }
 .add-picture, .delete-gallery{
 	margin: 11px auto;
@@ -251,7 +347,7 @@ li:hover, a:hover {
 }
 #contact, #login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > *, #login > *, #login a {
 	text-align: center;

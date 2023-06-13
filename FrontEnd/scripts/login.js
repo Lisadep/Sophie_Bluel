@@ -35,8 +35,3 @@ submitBtn.addEventListener("click", (e) => {
             window.location.href = "index.html"
         })
 });
-
-//Recuperer le token pour le passer au Web service (pour l'étape suivante)
-function getToken() {
-    return sessionStorage.getItem("token");
-}
