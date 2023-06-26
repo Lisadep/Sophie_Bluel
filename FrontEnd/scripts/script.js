@@ -115,7 +115,8 @@ const openModal = function (e) {
   //Bloquage de l'effet au clic
   e.preventDefault()
   // Récupération de l'attribut href des liens (ici #modal)
-  modal = document.querySelector(e.target.getAttribute("href"))
+  const idModal = e.currentTarget.className === "add-picture" ? "#modal-add" : "#modal-edit";
+  modal = document.querySelector(idModal)
   // Affichage de la boîte modal
   modal.style.display = null
   modal.removeAttribute("aria-hidden")
@@ -243,17 +244,26 @@ arrowLeft.addEventListener("click", function () {
   modalEdit.style.display = "flex";
 });
 
+// Ajout de la photo
+
 const btnAdd = document.querySelector(".modal-add-img-btn");
+
+const btnTitle = document.querySelector(".title-form");
+const btnValidate = document.querySelector("#btn-add");
+const categoryOfWork = document.querySelector(".category-of-work");
+
+let formData = new FormData();
 
 btnAdd.addEventListener("click", () => {
   const input = document.createElement("input");
   input.type = "file";
+
   input.addEventListener("change", (event) => {
     const file = event.target.files[0];
-    const formData = new FormData();
+    formData = new FormData();
     formData.append("image", file);
-    const imgElement = document.createElement("img");
-    imgElement.classList.add("selected-image");
+    formData.append("title", btnTitle.value);
+    formData.append("category", categoryOfWork.value);
     const boxModalAdd = document.querySelector(".modal-add-img");
     boxModalAdd.innerHTML = "";
     boxModalAdd.appendChild(imgElement);
@@ -262,14 +272,25 @@ btnAdd.addEventListener("click", () => {
       imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
-    fetch("http://" + window.location.hostname + ":5678/api/works", {
+    
+  });
+  input.click()
+});
+
+
+btnValidate.addEventListener("click", () => {
+  fetch(root + 'works', {
         method: "POST",
         body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Accept": "application/json;charset=utf-8",
+          "Authorization": `Bearer ${getToken()}`,
+        }
       })
       .then((response) => {})
       .catch((error) => {
         console.error(error);
       });
-  });
-  input.click();
-});
+})
+
