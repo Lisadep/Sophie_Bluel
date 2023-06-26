@@ -264,6 +264,8 @@ btnAdd.addEventListener("click", () => {
     formData.append("image", file);
     formData.append("title", btnTitle.value);
     formData.append("category", categoryOfWork.value);
+    const imgElement = document.createElement("img");
+    imgElement.classList.add("selected-image");
     const boxModalAdd = document.querySelector(".modal-add-img");
     boxModalAdd.innerHTML = "";
     boxModalAdd.appendChild(imgElement);
