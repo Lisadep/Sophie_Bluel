@@ -248,9 +248,7 @@ arrowLeft.addEventListener("click", function () {
 
 const btnAdd = document.querySelector(".modal-add-img-btn");
 
-const btnTitle = document.querySelector(".title-form");
 const btnValidate = document.querySelector("#btn-add");
-const categoryOfWork = document.querySelector(".category-of-work");
 
 let formData = new FormData();
 
@@ -262,8 +260,7 @@ btnAdd.addEventListener("click", () => {
     const file = event.target.files[0];
     formData = new FormData();
     formData.append("image", file);
-    formData.append("title", btnTitle.value);
-    formData.append("category", categoryOfWork.value);
+
     const imgElement = document.createElement("img");
     imgElement.classList.add("selected-image");
     const boxModalAdd = document.querySelector(".modal-add-img");
@@ -280,12 +277,18 @@ btnAdd.addEventListener("click", () => {
 });
 
 
-btnValidate.addEventListener("click", () => {
+btnValidate.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const btnTitle = document.querySelector(".title-form");
+  const categoryOfWork = document.querySelector(".category-of-work");
+  formData.append("title", btnTitle.value);
+  formData.append("category", categoryOfWork.value);
+
   fetch(root + 'works', {
         method: "POST",
         body: formData,
         headers: {
-          "Content-Type": "multipart/form-data",
           "Accept": "application/json;charset=utf-8",
           "Authorization": `Bearer ${getToken()}`,
         }
