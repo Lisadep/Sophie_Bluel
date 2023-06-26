@@ -68,6 +68,7 @@ function displayCategories() {
             loadedData.filter((work) => work.categoryId === element.id)
           );
         })
+        // Ajout des catégories dans le selecteur de la deuxième modale
         const categoryListSelect = document.querySelector("select");
         const option = document.createElement("option");
         option.innerHTML = element.name;
@@ -298,4 +299,5 @@ btnValidate.addEventListener("click", (e) => {
         console.error(error);
       });
 })
+
 

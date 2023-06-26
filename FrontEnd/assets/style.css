@@ -228,12 +228,17 @@ li:hover, a:hover {
 	display: flex;
 	flex-direction: column;
 }
-.modal-border {
+.modal-border, .modal-add-border {
   color: #B3B3B3;
-  width: 445px;
+  width: 460px;
   margin-bottom: 30px;
   margin-top: 25px;
 }
+.modal-add-border {
+	width: 420px;
+	margin-top: 45px;
+}
+
 .modal-add {
 	display: none;
 }
@@ -279,8 +284,28 @@ li:hover, a:hover {
 	align-items: center;
 }
 .title-form {
-	width: 173px;
-	border: 1px solid;
+	width: 418px;
+	height: 51px;
+	border: 0px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+.title {
+	margin: 20px 390px 10px 0px;
+}
+.category-of-work {
+	width: 420px;
+	height: 51px;
+	border: 0px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+.cat {
+	margin: 20px 355px 10px 0px;
+}
+#btn-add {
+	background-color: #A7A7A7;
+	border: none;
+	height: 36px;
+	width: 237px;
 }
 .add-picture {
 	font-family: 'Syne';
@@ -297,6 +322,10 @@ li:hover, a:hover {
 .add-picture a {
 	color: white;
 	text-decoration: none;
+}
+.selected-image {
+	max-height: 169px;
+	max-width: 420px;
 }
 .delete-gallery {
 	border: none;
