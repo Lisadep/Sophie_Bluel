@@ -86,11 +86,14 @@
 			</div>
 		</aside>
 
-		<aside id="modal-add" class="modal" aria-hidden="true">
+		<aside id="modal-add" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+		aria-labelledby="modal-edit-title" style="display:none">
 			<div class="modal-wrapper js-modal-stop">
 				<div class="modal-add-icons">
 					<i class="fa-solid fa-arrow-left"></i>
-					<i class="fa-solid fa-xmark js-close-modal"></i>
+					<div class="modal-cross js-modal-cross">
+						<i class="fa-solid fa-xmark"></i>
+					</div>
 				</div>
 				<p class="modal-edit-title">Ajout photo</p>
 				<div class="modal-add-img">
