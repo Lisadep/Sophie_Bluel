@@ -33,7 +33,7 @@
 		</nav>
 	</header>
 	<main>
-		<section id="introduction">
+		<div id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="Photo de Sophie Bluel">
 				<div class="edit-btn">
@@ -51,7 +51,7 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
-		</section>
+		</div>
 		<section id="portfolio">
 			<div class="gallery-title">
 				<h2>Mes Projets</h2>
@@ -64,8 +64,8 @@
 			<div class="gallery"></div>
 		</section>
 
-		<aside id="modal-edit" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
-			aria-labelledby="modal-edit-title" style="display:none">
+		<div id="modal-edit" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+			aria-label="modal-edit-title" style="display:none">
 			<div class="modal-wrapper js-modal-stop">
 				<div class="modal-cross js-modal-cross">
 					<i class="fa-solid fa-xmark"></i>
@@ -74,20 +74,16 @@
 				<div id="modal-gallery"></div>
 				<hr class="modal-border">
 				<button class="add-picture">
-					<a href="#">
-						<p>Ajouter une photo</p>
-					</a>
+						<span>Ajouter une photo</span>
 				</button>
 				<button class="delete-gallery">
-					<a href="#">
-						<p>Supprimer la galerie</p>
-					</a>
+						<span>Supprimer la galerie</span>
 				</button>
 			</div>
-		</aside>
+		</div>
 
-		<aside id="modal-add" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
-		aria-labelledby="modal-edit-title" style="display:none">
+		<div id="modal-add" class="modal" aria-hidden="true" role="dialog" aria-modal="false"
+		aria-label="modal-edit-title" style="display:none">
 			<div class="modal-wrapper js-modal-stop">
 				<div class="modal-add-icons">
 					<i class="fa-solid fa-arrow-left"></i>
@@ -103,14 +99,14 @@
 				</div>
 				<form class="modal-add-form" action="#" method="post">
 					<label for="title" class="title">Titre</label>
-					<input type="text" name="title" class="title-form">
+					<input id="title" type="text" name="title" class="title-form">
 					<label for="category" class="cat">Catégorie</label>
-					<select name="category" class="category-of-work"></select>
+					<select id="category" name="category" class="category-of-work"></select>
 					<hr class="modal-add-border">
 					<input class="btn-add" id="btn-add" type="submit" value="Valider">
 				</form>
 			</div>
-		</aside>
+		</div>
 
 		<section id="contact">
 			<h2>Contact</h2>

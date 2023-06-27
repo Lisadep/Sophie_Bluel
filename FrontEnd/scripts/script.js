@@ -50,6 +50,8 @@ function displayCategories() {
       categoryFilters = category;
       console.log(category)
 
+      // Création des boutons
+      // 1. bouton "Tous"
       const btnAll = document.createElement("button");
       btnAll.innerHTML = "Tous";
       document.getElementById("filters").appendChild(btnAll);
@@ -59,6 +61,7 @@ function displayCategories() {
         )
       });
 
+      // 2. autres boutons
       category.forEach(element => {
         const btnFilters = document.createElement("button");
         btnFilters.innerHTML = element.name;
@@ -105,7 +108,7 @@ function editMode() {
 
 editMode()
 
-//-----------Modale------------//
+//-----------Modales------------//
 
 // 1. Création
 
@@ -190,7 +193,7 @@ function displayWorkInModal(data) {
     figure.appendChild(deleteIconeBg)
     deleteIconeBg.appendChild(deleteIcone)
 
-
+    // Suppression au clic sur l'icone
     deleteIcone.addEventListener("click", function () {
       // Récupération de l'ID de l'élément parent
       const workId = data[i].id;
@@ -217,8 +220,9 @@ function displayWorkInModal(data) {
   }
 }
 
+// Fonction pour récupérer le token
 function getToken() {
-    return sessionStorage.getItem("token");
+  return sessionStorage.getItem("token");
 }
 
 let works = []
@@ -272,11 +276,10 @@ btnAdd.addEventListener("click", () => {
       imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
-    
+
   });
   input.click()
 });
-
 
 btnValidate.addEventListener("click", (e) => {
   e.preventDefault();
@@ -287,17 +290,30 @@ btnValidate.addEventListener("click", (e) => {
   formData.append("category", categoryOfWork.value);
 
   fetch(root + 'works', {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json;charset=utf-8",
-          "Authorization": `Bearer ${getToken()}`,
-        }
-      })
-      .then((response) => {})
-      .catch((error) => {
-        console.error(error);
-      });
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json;charset=utf-8",
+        "Authorization": `Bearer ${getToken()}`,
+      }
+    })
+    .then((response) => {})
+    .catch((error) => {
+      console.error(error);
+    });
 })
 
+// Vérification des champs pour changer la couleur du bouton d'envoi
 
+const btnTitle = document.querySelector(".title-form");
+const categoryOfWork = document.querySelector(".category-of-work");
+
+function validateForm() {
+  if (btnTitle.value) {
+    btnValidate.style.background = 'blue';
+  } else {
+    btnValidate.style.background = 'red';
+  }
+}
+
+validateForm();
