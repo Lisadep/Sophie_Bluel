@@ -7,7 +7,6 @@ async function loadWorks() {
   });
   const data = await response.json();
   works = data;
-  console.log(data);
   displayWork(works);
   displayWorkInModal(works);
 };
@@ -48,7 +47,6 @@ function displayCategories() {
     .then((reponse) => reponse.json())
     .then((category) => {
       categoryFilters = category;
-      console.log(category)
 
       // Création des boutons
       // 1. bouton "Tous"
@@ -57,27 +55,32 @@ function displayCategories() {
       document.getElementById("filters").appendChild(btnAll);
       btnAll.addEventListener("click", function () {
         displayWork(
-          loadedData
+          works
         )
       });
 
       // 2. autres boutons
+      const categoryListSelect = document.querySelector("select");
+      const option = document.createElement("option");
+        option.innerHTML = "";
+        categoryListSelect.appendChild(option)
+
       category.forEach(element => {
         const btnFilters = document.createElement("button");
         btnFilters.innerHTML = element.name;
         document.getElementById("filters").appendChild(btnFilters);
         btnFilters.addEventListener("click", function () {
           displayWork(
-            loadedData.filter((work) => work.categoryId === element.id)
+            works.filter((work) => work.categoryId === element.id)
           );
         })
         // Ajout des catégories dans le selecteur de la deuxième modale
-        const categoryListSelect = document.querySelector("select");
         const option = document.createElement("option");
         option.innerHTML = element.name;
         option.value = element.id;
         categoryListSelect.appendChild(option)
       });
+      categoryListSelect.addEventListener("change", verifyForm)
     });
 }
 
@@ -90,7 +93,6 @@ const logInOut = document.querySelector(".log-in-out");
 function editMode() {
   // Si le token est bien stocké
   if (sessionStorage.getItem("token")) {
-    console.log(sessionStorage)
     // Suppression des filtres
     document.querySelector(".filters").style = "display:none"
     // Affichage des boutons du mode édition
@@ -98,7 +100,7 @@ function editMode() {
     document.querySelector(".edit-btn").style = "visibility:visible";
     document.querySelector(".edit-btn2").style = "visibility:visible";
     logInOut.innerText = "logout";
-    // Au clique sur logout on suppr le token et on renvoi la page principale
+    // Au clique sur logout on suppr le token et on renvoie la page principale
     logInOut.addEventListener("click", () => {
       sessionStorage.removeItem("token");
       logInOut.href = "index.html";
@@ -145,6 +147,7 @@ const closeModal = function (e) {
   modal.querySelector(".js-modal-cross").removeEventListener("click", closeModal)
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
   modal = null
+  fileChange = false
 }
 
 // Fonction pour que la modale ne se ferme pas au clic nimporte où
@@ -238,7 +241,18 @@ function modalAddImg() {
     modalEdit.style.display = "none";
     modalAdd.style.display = "flex";
   });
+  document.getElementById("title").addEventListener("change", verifyForm )
 }
+
+function verifyForm() {
+  const valueTitle = document.getElementById("title").value
+  const titleOk = valueTitle !== null && valueTitle !== undefined && valueTitle.trim().length > 0;
+  const categoryOk = document.getElementById("category").value.length > 0;
+  if (titleOk && fileChange && categoryOk) {
+    validateForm();
+  }
+}
+
 
 modalAddImg();
 
@@ -257,6 +271,8 @@ const btnValidate = document.querySelector("#btn-add");
 
 let formData = new FormData();
 
+let fileChange = false;
+
 btnAdd.addEventListener("click", () => {
   const input = document.createElement("input");
   input.type = "file";
@@ -265,6 +281,8 @@ btnAdd.addEventListener("click", () => {
     const file = event.target.files[0];
     formData = new FormData();
     formData.append("image", file);
+
+    fileChange = true;
 
     const imgElement = document.createElement("img");
     imgElement.classList.add("selected-image");
@@ -276,7 +294,7 @@ btnAdd.addEventListener("click", () => {
       imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
-
+    verifyForm();
   });
   input.click()
 });
@@ -297,7 +315,7 @@ btnValidate.addEventListener("click", (e) => {
         "Authorization": `Bearer ${getToken()}`,
       }
     })
-    .then((response) => {})
+    .then()
     .catch((error) => {
       console.error(error);
     });
@@ -310,9 +328,9 @@ const categoryOfWork = document.querySelector(".category-of-work");
 
 function validateForm() {
   if (btnTitle.value) {
-    btnValidate.style.background = 'blue';
+    btnValidate.style.background = '#1D6154';
   } else {
-    btnValidate.style.background = 'red';
+    btnValidate.style.background = '#A7A7A7';
   }
 }
 

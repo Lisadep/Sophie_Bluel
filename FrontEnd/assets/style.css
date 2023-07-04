@@ -215,6 +215,9 @@ li:hover, a:hover {
     bottom: 114px;
     left: 57px;
 }
+.deleteIconeBg i {
+	cursor: pointer;
+}
 .deleteIcone {
 	color: white;
 }
@@ -306,6 +309,7 @@ li:hover, a:hover {
 	border: none;
 	height: 30px;
 	width: 237px;
+	cursor: pointer;
 }
 .add-picture {
 	font-family: 'Syne';
@@ -332,7 +336,7 @@ li:hover, a:hover {
 	background-color: white;
 	width: 140px;
 }
-.delete-gallery a{
+.delete-gallery span{
 	color: red;
 	text-decoration: none;
 }
@@ -369,6 +373,10 @@ li:hover, a:hover {
 	font-weight: 700;
 	font-size: 16px;
 	padding: 9px;
+}
+.filters > button:active {
+	background-color: #1D6154;
+	color: white;
 }
 .filter_selected {
 	background-color: #1D6154;
