@@ -117,11 +117,13 @@ editMode()
 // variable pour savoir quelle modale est ouverte
 let modal = null
 
-const openModal = function (e) {
+const openModal = function (e, idModal) {
   //Bloquage de l'effet au clic
-  e.preventDefault()
+  if(e){
+    e.preventDefault()
+  }
   // Récupération de l'attribut href des liens (ici #modal)
-  const idModal = e.currentTarget.className === "add-picture" ? "#modal-add" : "#modal-edit";
+  idModal = idModal === undefined ? e.currentTarget.className  === "add-picture" ? "#modal-add" : "#modal-edit" : idModal;
   modal = document.querySelector(idModal)
   // Affichage de la boîte modal
   modal.style.display = null
@@ -138,7 +140,10 @@ const closeModal = function (e) {
   // si aucune modale n'est active on ne fait rien
   if (modal === null) return
   // on fait l'inverse de l'ouverture de la modale
-  e.preventDefault()
+  if(e) {
+    e.preventDefault()
+  }
+
   modal.style.display = "none"
   modal.setAttribute("aria-hidden", "true")
   modal.removeAttribute("aria-modal")
@@ -319,15 +324,11 @@ btnValidate.addEventListener("click", (e) => {
     })
     .then((response) => response.json())
     .then((data) => {
-      const gallery = document.querySelector(".gallery");
-      const figure = document.createElement("figure");
-      figure.innerHTML = `
-      <img src="${data.imageUrl}" alt="${data.title}" crossorigin="anonymous">
-      <figcaption>${data.title}</figcaption>
-    `;
-    gallery.appendChild(figure);
+    works.push(data);
+    displayWork(works);
     displayWorkInModal(works);
-    document.getElementById("modal-add").style = "display:none";
+    closeModal();
+    openModal(undefined,"#modal-edit");
     })
     .catch((error) => {
       console.error(error);
