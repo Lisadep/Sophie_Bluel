@@ -280,6 +280,7 @@ li:hover, a:hover {
 	font-size: 14px;
     border: 1px;
     padding: 8px;
+	cursor: pointer;
 }
 .modal-add-form{
 	display: flex;
@@ -322,6 +323,7 @@ li:hover, a:hover {
 	height: 36px;
 	border-style: none;
 	padding: 10px;
+	cursor: pointer;
 }
 .add-picture a {
 	color: white;

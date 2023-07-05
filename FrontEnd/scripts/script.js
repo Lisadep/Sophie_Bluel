@@ -179,6 +179,7 @@ const modalGallery = document.querySelector("#modal-gallery");
 
 //Fonction pour afficher les travaux dans la modale
 function displayWorkInModal(data) {
+  modalGallery.innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     const figure = document.createElement("figure");
     // Affichage des travaux
@@ -197,7 +198,8 @@ function displayWorkInModal(data) {
     deleteIconeBg.appendChild(deleteIcone)
 
     // Suppression au clic sur l'icone
-    deleteIcone.addEventListener("click", function () {
+    deleteIcone.addEventListener("click", function (e) {
+      e.preventDefault();
       // Récupération de l'ID de l'élément parent
       const workId = data[i].id;
       // Requête à l'API pour supprimer
@@ -315,7 +317,18 @@ btnValidate.addEventListener("click", (e) => {
         "Authorization": `Bearer ${getToken()}`,
       }
     })
-    .then()
+    .then((response) => response.json())
+    .then((data) => {
+      const gallery = document.querySelector(".gallery");
+      const figure = document.createElement("figure");
+      figure.innerHTML = `
+      <img src="${data.imageUrl}" alt="${data.title}" crossorigin="anonymous">
+      <figcaption>${data.title}</figcaption>
+    `;
+    gallery.appendChild(figure);
+    displayWorkInModal(works);
+    document.getElementById("modal-add").style = "display:none";
+    })
     .catch((error) => {
       console.error(error);
     });
