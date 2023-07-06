@@ -33,11 +33,6 @@ loadWorks();
 
 //-----------Filtres------------//
 
-const buttonAll = document.querySelector(".all");
-const buttonObjects = document.querySelector(".objects");
-const buttonApartments = document.querySelector(".apartments");
-const buttonHotelsAndRestaurants = document.querySelector(".hotelsAndRestaurants");
-
 let categoryFilters = []
 
 function displayCategories() {
@@ -60,11 +55,13 @@ function displayCategories() {
       });
 
       // 2. autres boutons
+      // (Ajout d'une catégorie vide dans le selecteur de la deuxième modale)
       const categoryListSelect = document.querySelector("select");
       const option = document.createElement("option");
-        option.innerHTML = "";
-        categoryListSelect.appendChild(option)
+      option.innerHTML = "";
+      categoryListSelect.appendChild(option)
 
+      // Ajout des boutons filtres
       category.forEach(element => {
         const btnFilters = document.createElement("button");
         btnFilters.innerHTML = element.name;
@@ -74,7 +71,8 @@ function displayCategories() {
             works.filter((work) => work.categoryId === element.id)
           );
         })
-        // Ajout des catégories dans le selecteur de la deuxième modale
+        
+        // (Ajout des catégories dans le selecteur de la deuxième modale)
         const option = document.createElement("option");
         option.innerHTML = element.name;
         option.value = element.id;
@@ -119,11 +117,11 @@ let modal = null
 
 const openModal = function (e, idModal) {
   //Bloquage de l'effet au clic
-  if(e){
+  if (e) {
     e.preventDefault()
   }
-  // Récupération de l'attribut href des liens (ici #modal)
-  idModal = idModal === undefined ? e.currentTarget.className  === "add-picture" ? "#modal-add" : "#modal-edit" : idModal;
+  // Récupération de l'attribut href des liens
+  idModal = idModal === undefined ? e.currentTarget.className === "add-picture" ? "#modal-add" : "#modal-edit" : idModal;
   modal = document.querySelector(idModal)
   // Affichage de la boîte modal
   modal.style.display = null
@@ -140,10 +138,9 @@ const closeModal = function (e) {
   // si aucune modale n'est active on ne fait rien
   if (modal === null) return
   // on fait l'inverse de l'ouverture de la modale
-  if(e) {
+  if (e) {
     e.preventDefault()
   }
-
   modal.style.display = "none"
   modal.setAttribute("aria-hidden", "true")
   modal.removeAttribute("aria-modal")
@@ -211,7 +208,7 @@ function displayWorkInModal(data) {
       fetch(root + `works/${workId}`, {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json;charset=utf-8",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${getToken()}`,
           }
         })
@@ -248,7 +245,7 @@ function modalAddImg() {
     modalEdit.style.display = "none";
     modalAdd.style.display = "flex";
   });
-  document.getElementById("title").addEventListener("change", verifyForm )
+  document.getElementById("title").addEventListener("change", verifyForm)
 }
 
 function verifyForm() {
@@ -259,7 +256,6 @@ function verifyForm() {
     validateForm();
   }
 }
-
 
 modalAddImg();
 
@@ -273,11 +269,8 @@ arrowLeft.addEventListener("click", function () {
 // Ajout de la photo
 
 const btnAdd = document.querySelector(".modal-add-img-btn");
-
 const btnValidate = document.querySelector("#btn-add");
-
 let formData = new FormData();
-
 let fileChange = false;
 
 btnAdd.addEventListener("click", () => {
@@ -318,17 +311,17 @@ btnValidate.addEventListener("click", (e) => {
       method: "POST",
       body: formData,
       headers: {
-        "Accept": "application/json;charset=utf-8",
+        "Accept": "application/json",
         "Authorization": `Bearer ${getToken()}`,
       }
     })
     .then((response) => response.json())
     .then((data) => {
-    works.push(data);
-    displayWork(works);
-    displayWorkInModal(works);
-    closeModal();
-    openModal(undefined,"#modal-edit");
+      works.push(data);
+      displayWork(works);
+      displayWorkInModal(works);
+      closeModal();
+      openModal(undefined, "#modal-edit");
     })
     .catch((error) => {
       console.error(error);
